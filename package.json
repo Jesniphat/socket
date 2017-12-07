@@ -8,7 +8,13 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:ssr": "ng build --prod && npm run webpack:server",
+    "server:dev": "concurrently \"nodemon -e js,ts --watch server/ --exec npm run webpack:dev\" \"PROD=development nodemon --watch dist/server/ ./dist/server/www.js\" ",
+    "cliend:dev": "ng serve --aot --proxy-config proxy.conf.json",
+    "serve:ssr": "PROD=production node dist/server/www.js",
+    "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
+    "webpack:dev": "webpack --config webpack.server.config.js --progress --colors -d"
   },
   "private": true,
   "dependencies": {
@@ -21,8 +27,14 @@
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
+    "concurrently": "^3.5.1",
+    "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
+    "nodemon": "^1.12.5",
     "rxjs": "^5.5.2",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4",
+    "ts-loader": "^3.2.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
