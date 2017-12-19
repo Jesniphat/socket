@@ -34,13 +34,12 @@ const io = require('socket.io')(server, {
 });
 
 io.on('connection', function (socket) {
-  // console.log('User connected');
+  console.log('User connected');
   socket.on('disconnect', function() {
-    // console.log('User disconnected');
+    console.log('User disconnected');
   });
   socket.on('save-message', function (data) {
-    // console.log('socket = ', data);
-    io.emit(data.logindata.type, { loginData: data.logindata, message: data.message });
+    io.emit('send-message', data);
   });
 });
 
