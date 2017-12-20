@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
   public myName: any;
   public messageList = [];
 
-  public socket = io('http://localhost:7200');
+  public socket = io.connect('http://13.59.164.106:7200', {reconnect: true});
+  // public socket = io.connect('http://localhost:7200', {reconnect: true});
 
   public constructor() {
     this.storage = localStorage;
